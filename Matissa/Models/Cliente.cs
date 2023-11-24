@@ -7,6 +7,7 @@ namespace Matissa.Models
     {
         public Cliente()
         {
+            Cita = new HashSet<Citum>();
             Pedidos = new HashSet<Pedido>();
         }
 
@@ -19,6 +20,7 @@ namespace Matissa.Models
         public string Dirección { get; set; } = null!;
         public byte Estado { get; set; }
 
+        public virtual ICollection<Citum> Cita { get; set; }
         public virtual ICollection<Pedido> Pedidos { get; set; }
     }
 }
