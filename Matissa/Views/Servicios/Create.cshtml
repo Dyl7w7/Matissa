@@ -1,0 +1,63 @@
+﻿@model Matissa.Models.Servicio
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Servicio</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdServicio" class="control-label"></label>
+                <input asp-for="IdServicio" class="form-control" />
+                <span asp-validation-for="IdServicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreServicio" class="control-label"></label>
+                <input asp-for="NombreServicio" class="form-control" />
+                <span asp-validation-for="NombreServicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripción" class="control-label"></label>
+                <input asp-for="Descripción" class="form-control" />
+                <span asp-validation-for="Descripción" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duración" class="control-label"></label>
+                <input asp-for="Duración" class="form-control" />
+                <span asp-validation-for="Duración" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Estado" class="control-label"></label>
+                <input asp-for="Estado" class="form-control" />
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdTipoServicio" class="control-label"></label>
+                <select asp-for="IdTipoServicio" class ="form-control" asp-items="ViewBag.IdTipoServicio"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

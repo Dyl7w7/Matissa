@@ -18,7 +18,7 @@ namespace Matissa.Models
         public byte Estado { get; set; }
         public int IdTipoServicio { get; set; }
 
-        public virtual TipoServicio IdTipoServicioNavigation { get; set; } = null!;
+        public virtual TipoServicio? IdTipoServicioNavigation { get; set; } 
         public virtual ICollection<DetalleCitum> DetalleCita { get; set; }
     }
 }
