@@ -1,11 +1,10 @@
 ﻿@model IEnumerable<Matissa.Models.Citum>
 
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="/css/citas/Citums.css">
+<link rel="stylesheet" href="~/css/citas/Citums.css">
     <div class="container-fluid titulo-citas">
         <div class="row">
           <div class="col-12">
@@ -13,77 +12,82 @@
           </div>
         </div>
     </div>
-    <div class="form-floating">
-        <input type="text" class="form-control rounded-pill buscar-cita" id="floatingInputInvalid" placeholder="" >
-        <label for="floatingInputInvalid" class="label-buscar"><i class="fa-solid fa-magnifying-glass"></i>  Buscar...</label>
-      </div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col" >
-            <form asp-action="Details">
-            <button  class="visualizar rounded-pill">
-                <p class="rounded-pill" style="display: flex;">Ver detalles de cita  <i class="fa-sharp fa-solid fa-eye" style="font-size: 20px; margin-left: 100px; margin-top: 5px;"></i></p>
-          </button>
-          </form>
+
+<div class="container-fluid">
+    <div class="row d-flex">
+        <div class="col-md-6 mb-3">
+            <div class="form-floating">
+                <input type="date" class="form-control rounded-pill" id="searchInput" onchange="buscarPorFecha()">
+                <label for="inputBuscarFecha" class="label-buscar"><i class="fa-solid fa-magnifying-glass"></i> Buscar por fecha...</label>
+            </div>
         </div>
-          <div class="col">
-              <form asp-action="Create" asp-controller="DetalleCitums"> 
-            <button  class="crear">
-              <p class="rounded-pill" >Agregar cita <i class="fa-regular fa-square-plus" style="font-size: 20px; margin-left: 90px; text-align: center"></i></p>
+        <div class="col-md-6 mb-3 d-flex justify-content-end">
+            <button onclick="window.location.href = '@Url.Action("Create", "Citums")';" class="btn crear">
+                <p class="rounded-pill">Agregar cita <i class="fa-regular fa-square-plus" style="font-size: 20px; margin-left: 10px;"></i></p>
             </button>
-               </form>
-          </div>
-          <div class="col">
-            <button href="#" class="generar" style="padding: 10px;">
-              <p class="rounded-pill">  Generar reporte de citas<i class="fa-solid fa-download" style=" font: size 10px; margin-left: 20px;"></i></p>
-            </button>
-          </div>
-      </div>
+        </div>
     </div>
-<div class="tabla">
-<table class="p-3  ">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaRegistro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CostoTotal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdClienteNavigation)
-            </th>
-            <th colspan="2">
-                Operaciones
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaRegistro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CostoTotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdClienteNavigation.IdCliente)
-            </td>
-            <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdCita"><i class="fa-solid fa-pencil" style="color:#3CC3BD;"></i></a> |
-                <a asp-action="Details" asp-route-id="@item.IdCita">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdCita"><i class="fa-sharp fa-solid fa-circle-xmark" style="color:#929292"></i></a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
 </div>
+<br />
+<br />
+
+
+<div class="container resultadoBusqueda">
+    <table class="table" id="tablaCitas" table-striped table-bordered">
+        <thead style="background-color: lightgray;">
+            <tr>
+                <th style="background-color: lightgray;">@Html.DisplayNameFor(model => model.FechaRegistro)</th>
+                <th style="background-color: lightgray;">@Html.DisplayNameFor(model => model.CostoTotal)</th>
+                <th style="background-color: lightgray;">@Html.DisplayNameFor(model => model.Estado)</th>
+                <th style="background-color: lightgray;">@Html.DisplayNameFor(model => model.IdClienteNavigation)</th>
+                <th style="background-color: lightgray;"></th>
+            </tr>
+        </thead>
+        <tbody id="tablaCitasBody">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FechaRegistro.ToString("yyyy-MM-dd")</td>
+                    <td>@Html.DisplayFor(modelItem => item.CostoTotal)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IdClienteNavigation.IdCliente)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.IdCita"><i class="fa-solid fa-pencil" style="color:#3CC3BD;"></i></a> |
+                        <a asp-action="Details" asp-route-id="@item.IdCita"><i class="fa-sharp fa-solid fa-eye" style="color:#929292"></i></a> |
+                        <a asp-action="Delete" asp-route-id="@item.IdCita"><i class="fa-sharp fa-solid fa-circle-xmark" style="color:#929292"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function visualizar(idCita) {
+        window.location.href = `/Citums/Details/${idCita}`;
+    }
+    function buscarPorFecha() {
+        // Obtener el valor de la fecha ingresada
+        var fecha = document.getElementById("searchInput").value;
+
+        // Filtrar las filas de la tabla por fecha
+        var tableBody = document.getElementById("tablaCitasBody");
+        var rows = tableBody.getElementsByTagName("tr");
+        for (var i = 0; i < rows.length; i++) {
+            var fechaRegistro = rows[i].getElementsByTagName("td")[0].innerText;
+            if (fechaRegistro === fecha) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
+ 
+</script>
+
+
+
+
+
+
+

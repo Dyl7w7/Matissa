@@ -47,53 +47,25 @@ namespace Matissa.Controllers
         // GET: Citums/Create
         public IActionResult Create()
         {
-            ViewData["Clientes"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente");
+            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente");
             return View();
         }
-
-
-
 
         // POST: Citums/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCita,FechaRegistro,CostoTotal,Estado,IdCliente")] Citum citum, int[] servicios)
+        public async Task<IActionResult> Create([Bind("IdCita,FechaRegistro,CostoTotal,Estado,IdCliente")] Citum citum)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(citum);
                 await _context.SaveChangesAsync();
-
-                // Guardar detalles de servicios seleccionados en la tabla DetalleCita
-                if (servicios != null && servicios.Length > 0)
-                {
-                    foreach (var servicioId in servicios)
-                    {
-                        var detalleCita = new DetalleCitum
-                        {
-                            IdCita = citum.IdCita,
-                            IdServicio = servicioId
-
-                            // Otros campos si es necesario
-                        };
-                        _context.Add(detalleCita);
-                    }
-                    await _context.SaveChangesAsync();
-                }
-
                 return RedirectToAction(nameof(Index));
             }
-
-            // Obtener la lista de clientes para la vista
             ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", citum.IdCliente);
-
-            // Obtener la lista de servicios para la vista
-            ViewBag.Servicios = _context.Servicios.ToList();
-
             return View(citum);
-
         }
 
         // GET: Citums/Edit/5
@@ -191,5 +163,28 @@ namespace Matissa.Controllers
         {
           return (_context.Cita?.Any(e => e.IdCita == id)).GetValueOrDefault();
         }
+        public IActionResult FiltrarPorFecha(DateTime fecha)
+        {
+            var citasFiltradas = _context.Cita
+                .Where(c => c.FechaRegistro.Date == fecha.Date)
+                .ToList();
+
+            return PartialView("_TablaCitasPartial", citasFiltradas);
+        }
+        [HttpGet]
+        public IActionResult BuscarPorFecha(DateTime? fecha)
+        {
+            if (fecha.HasValue)
+            {
+                // Filtrar los resultados por fecha
+                var citas = _context.Cita.Where(c => c.FechaRegistro.Date == fecha.Value.Date).ToList();
+                return PartialView("_TablaCitasPartial", citas);
+            }
+
+            // Si no se proporciona una fecha, devolver todos los resultados
+            var todasLasCitas = _context.Cita.ToList();
+            return PartialView("_TablaCitasPartial", todasLasCitas);
+        }
+
     }
 }

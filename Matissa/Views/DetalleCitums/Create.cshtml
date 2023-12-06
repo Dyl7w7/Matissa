@@ -9,74 +9,66 @@
 
 <h4>DetalleCitum</h4>
 <hr />
-<div class="row " style="margin:5px">
-    <div class="col">
+<div class="row">
+    <div class="col-md-4">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger "></div>
-            <div class="row">
-                <div class="form-group col-md-3 text-center">
-                    <label asp-for="IdDetalleCita" class="control-label "></label>
-                    <input asp-for="IdDetalleCita" class="form-control rounded-pill" />
-                    <span asp-validation-for="IdDetalleCita" class="text-danger"></span>
-                </div>
-                <div class="form-group col-md-3 text-center">
-                    <label asp-for="IdEmpleado" class="control-label"></label>
-                    <select asp-for="IdEmpleado" class="form-control rounded-pill" asp-items="ViewBag.IdEmpleado"></select>
-                </div>
-                <div class="form-group col-md-3 text-center">
-                    <label asp-for="IdServicio" class="control-label"></label>
-                    <select asp-for="IdServicio" class="form-control rounded-pill" asp-items="ViewBag.IdServicio"></select>
-                </div>
-                <div class="form-group col-md-3 text-center">
-                    <label asp-for="FechaCita" class="control-label"></label>
-                    <input asp-for="FechaCita" class="form-control rounded-pill" />
-                    <span asp-validation-for="FechaCita" class="text-danger"></span>
-                </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdDetalleCita" class="control-label"></label>
+                <input asp-for="IdDetalleCita" class="form-control" />
+                <span asp-validation-for="IdDetalleCita" class="text-danger"></span>
             </div>
-
-         <div class="row">
-            <div class="form-group col-md-3 text-center">
+            <div class="form-group">
+                <label asp-for="IdCita" class="control-label"></label>
+                <select asp-for="IdCita" class ="form-control" asp-items="ViewBag.IdCita"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdEmpleado" class="control-label"></label>
+                <select asp-for="IdEmpleado" class ="form-control" asp-items="ViewBag.IdEmpleado"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdServicio" class="control-label"></label>
+                <select asp-for="IdServicio" class ="form-control" asp-items="ViewBag.IdServicio"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaCita" class="control-label"></label>
+                <input asp-for="FechaCita" class="form-control" />
+                <span asp-validation-for="FechaCita" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="HoraInicio" class="control-label"></label>
-                <input asp-for="HoraInicio" class="form-control rounded-pill" />
+                <input asp-for="HoraInicio" class="form-control" />
                 <span asp-validation-for="HoraInicio" class="text-danger"></span>
             </div>
-                <div class="form-group col-md-3 text-center">
+            <div class="form-group">
                 <label asp-for="HoraFin" class="control-label"></label>
-                <input asp-for="HoraFin" class="form-control rounded-pill" />
+                <input asp-for="HoraFin" class="form-control" />
                 <span asp-validation-for="HoraFin" class="text-danger"></span>
             </div>
-                <div class="form-group col-md-3 text-center">
+            <div class="form-group">
                 <label asp-for="DuraciónServicio" class="control-label"></label>
-                <input asp-for="DuraciónServicio" class="form-control rounded-pill" />
+                <input asp-for="DuraciónServicio" class="form-control" />
                 <span asp-validation-for="DuraciónServicio" class="text-danger"></span>
             </div>
-                <div class="form-group col-md-3 text-center">
+            <div class="form-group">
                 <label asp-for="Descuento" class="control-label"></label>
-                <input asp-for="Descuento" class="form-control rounded-pill" />
+                <input asp-for="Descuento" class="form-control" />
                 <span asp-validation-for="Descuento" class="text-danger"></span>
             </div>
-         </div>
-            <div class="col" style=" display:grid; place-items:center">
-                <div class="row" style=" display:flex;">
-                    <div class="form-group text-center col-md-6 ">
-                        <label asp-for="CostoServicio" class="control-label"></label>
-                        <input asp-for="CostoServicio" class="form-control rounded-pill" />
-                        <span asp-validation-for="CostoServicio" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-6 text-center ">
-                        <label asp-for="Estado" class="control-label"></label>
-                        <input asp-for="Estado" class="form-control rounded-pill" />
-                        <span asp-validation-for="Estado" class="text-danger"></span>
-                    </div>
-                </div>
-         </div>
-            
+            <div class="form-group">
+                <label asp-for="CostoServicio" class="control-label"></label>
+                <input asp-for="CostoServicio" class="form-control" />
+                <span asp-validation-for="CostoServicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Estado" class="control-label"></label>
+                <input asp-for="Estado" class="form-control" />
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
         </form>
-        <div class="form-group">
-            <form asp-action="create" asp-controller="Citums"> 
-            <input type="submit" value="Create" class="btn btn-primary" />
-            </form>
-        </div>
     </div>
 </div>
 

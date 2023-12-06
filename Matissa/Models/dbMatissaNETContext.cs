@@ -430,6 +430,11 @@ namespace Matissa.Models
             OnModelCreatingPartial(modelBuilder);
         }
 
+        internal object BuscarPorFecha(string searchText)
+        {
+            throw new NotImplementedException();
+        }
+
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

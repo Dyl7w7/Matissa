@@ -51,7 +51,7 @@ namespace Matissa.Controllers
         {
             ViewData["IdCita"] = new SelectList(_context.Cita, "IdCita", "IdCita");
             ViewData["IdEmpleado"] = new SelectList(_context.Empleados, "IdEmpleado", "IdEmpleado");
-            ViewData["IdServicio"] = new SelectList(_context.Servicios, "IdServicio", "NombreServicio");
+            ViewData["IdServicio"] = new SelectList(_context.Servicios, "IdServicio", "IdServicio");
             return View();
         }
 
@@ -70,7 +70,7 @@ namespace Matissa.Controllers
             }
             ViewData["IdCita"] = new SelectList(_context.Cita, "IdCita", "IdCita", detalleCitum.IdCita);
             ViewData["IdEmpleado"] = new SelectList(_context.Empleados, "IdEmpleado", "IdEmpleado", detalleCitum.IdEmpleado);
-            ViewData["IdServicio"] = new SelectList(_context.Servicios, "IdServicio", "NombreServicio", detalleCitum.IdServicio);
+            ViewData["IdServicio"] = new SelectList(_context.Servicios, "IdServicio", "IdServicio", detalleCitum.IdServicio);
             return View(detalleCitum);
         }
 

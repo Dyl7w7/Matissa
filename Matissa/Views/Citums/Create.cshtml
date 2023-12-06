@@ -4,55 +4,63 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="/css/citas/create.css" />
+
+<link rel="stylesheet" href="~/css/citas/create.css">
 <div class="container-fluid titulo-citas">
     <div class="row">
-        <div class="col">
-            <h1>Agendar nueva cita</h1>
+        <div class="col-12">
+            <h1>Listado de Citas</h1>
         </div>
     </div>
 </div>
-<div class="container text-center">
-    <div class="row align-items-start">
-        <div class="col">
-            <label class="text-center">Codigo de la Cita</label><br />
-            <input class="rounded-pill text-center custom-input" />
-        </div>
-        <div class="col">
-            <label class="text-center">Costo Total</label><br />
-            <input class="rounded-pill text-center custom-input" />
-        </div>
-        <div class="col">
-            <label class="text-center">Seleccione Fecha y Hora</label><br />
-            <input class="rounded-pill custom-input" type="date" />
-        </div>
-    </div>
-    <div class="row align-itens-star">
-        <div class="col-md-4">
-            <label class="text-center">idCliente</label><br />
-            <select asp-for="IdCliente" class="form-control rounded-pill custom-input text-center" asp-items="ViewBag.IdCliente"></select>
-        </div>
-        <div class="col-md-4">
-            <label class="text-center">Nombre Cliente</label><br />
-            <input class="rounded-pill text-center custom-input" />
-        </div>
+<div class="row">
+    <form asp-action="Create">
+         <div class="col-md-4">
         
-    </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="IdCita" class="control-label"></label>
+                <input asp-for="IdCita" class="form-control custom-input rounded-pill" />
+                <span asp-validation-for="IdCita" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FechaRegistro" class="control-label"></label>
+                <input asp-for="FechaRegistro" class="form-control rounded-pill custom-input" />
+                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CostoTotal" class="control-label"></label>
+                <input asp-for="CostoTotal" class="form-control rounded-pill custom-input" />
+                <span asp-validation-for="CostoTotal" class="text-danger"></span>
+            </div>
+        </div> <!-- Cerrar la primera columna -->
+
+    <div class="col-md-4">
+        <!-- Segundo grupo de inputs -->
+        <div class="form-group">
+            <label asp-for="Estado" class="control-label"></label>
+            <input asp-for="Estado" class="form-control rounded-pill custom-input" />
+            <span asp-validation-for="Estado" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IdCliente" class="control-label"></label>
+            <select asp-for="IdCliente" class="form-control rounded-pill custom-input" asp-items="ViewBag.IdCliente"></select>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            <a class="btn btn-dark" asp-action="Index">Back to List</a>
+        </div>
+        </div>
+    </form> 
 </div>
-<br>
-<br>
 
 
 
-    <div class="row justify-content-center botones">
-        <div class="col text-end">
-            <input type="button" class="boton-cancelar rounded-pill" value="Cancelar">
-        </div>
-        <div class="col">
-            <input type="submit" class="boton-aceptar rounded-pill" value="Aceptar" onclick="validacion()">
-        </div>
-    </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-

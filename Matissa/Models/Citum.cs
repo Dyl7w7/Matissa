@@ -26,7 +26,7 @@ namespace Matissa.Models
        [Required(ErrorMessage = "El cliente es obligatorio.")]
         public int IdCliente { get; set; }
 
-        public virtual Cliente IdClienteNavigation { get; set; }
+        public virtual Cliente? IdClienteNavigation { get; set; }
         public virtual ICollection<DetalleCitum> DetalleCita { get; set; }
         public virtual ICollection<VentaServicio> VentaServicios { get; set; }
     }
