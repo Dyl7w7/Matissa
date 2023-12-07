@@ -56,7 +56,7 @@ namespace Matissa.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCita,FechaRegistro,CostoTotal,Estado,IdCliente")] Citum citum)
+        public async Task<IActionResult> Create([Bind("IdCita,FechaRegistro,CostoTotal,Estado,IdCliente,NombreCliente")] Citum citum)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +64,7 @@ namespace Matissa.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", citum.IdCliente);
+            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "NombreCliente", citum.IdCliente);
             return View(citum);
         }
 
@@ -81,7 +81,7 @@ namespace Matissa.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", citum.IdCliente);
+            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "NombreCliente", citum.IdCliente);
             return View(citum);
         }
 
